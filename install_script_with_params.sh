@@ -17,9 +17,23 @@ apt-get install vim curl wget git sudo net-tools zip unzip -y
 wget -N https://raw.githubusercontent.com/XrayR-project/XrayR-release/master/install.sh && bash install.sh
 
 # Read user input for XrayR configuration
-read -p "Enter XrayR API Host (e.g., http://127.0.0.1:667): " api_host
-read -p "Enter XrayR API Key (e.g., 123): " api_key
-read -p "Enter XrayR Node ID (e.g., 41): " node_id
+if [ -z "$1" ]; then
+    read -p "Enter XrayR API Host (e.g., http://127.0.0.1:667): " api_host
+else
+    api_host="$1"
+fi
+
+if [ -z "$2" ]; then
+    read -p "Enter XrayR API Key (e.g., 123): " api_key
+else
+    api_key="$2"
+fi
+
+if [ -z "$3" ]; then
+    read -p "Enter XrayR Node ID (e.g., 41): " node_id
+else
+    node_id="$3"
+fi
 
 # Update XrayR configuration file
 sed -i "s#^\\s*ApiHost:.*#  ApiHost: \"${api_host}\",#" /etc/XrayR/config.yml
@@ -27,7 +41,7 @@ sed -i "s#^\\s*ApiKey:.*#  ApiKey: \"${api_key}\",#" /etc/XrayR/config.yml
 sed -i "s#^\\s*NodeID:.*#  NodeID: ${node_id}#" /etc/XrayR/config.yml
 
 # Change CertMode to none in the XrayR configuration file
-sed -i "s#^\\s*\"CertMode\":.*#  \"CertMode\": \"none\",#" /etc/XrayR/config.yml
+sed -i "s#^\\s*CertMode:.*#  CertMode: none,#" /etc/XrayR/config.yml
 
 # Install gost
 mkdir gost && cd gost
@@ -37,8 +51,17 @@ mv gost-linux-amd64-2.11.1 gost
 chmod +x gost
 
 # Read user input for gost configuration
-read -p "Enter the relay+tls port (e.g., 10165): " relay_port
-read -p "Enter the local port (e.g., 10166): " local_port
+if [ -z "$4" ]; then
+    read -p "Enter the relay+tls port (e.g., 10165): " relay_port
+else
+    relay_port="$4"
+fi
+
+if [ -z "$5" ]; then
+    read -p "Enter the local port (e.g., 10166): " local_port
+else
+    local_port="$5"
+fi
 
 # Create gost.json file
 cat <<EOF > gost.json
