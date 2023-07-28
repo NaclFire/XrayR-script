@@ -36,12 +36,12 @@ else
 fi
 
 # Update XrayR configuration file
-sed -i "s#^\\s*ApiHost:.*#    ApiHost: \"${api_host}\"#" /etc/XrayR/config.yml
-sed -i "s#^\\s*ApiKey:.*#    ApiKey: \"${api_key}\"#" /etc/XrayR/config.yml
-sed -i "s#^\\s*NodeID:.*#    NodeID: ${node_id}#" /etc/XrayR/config.yml
+sed -i "s#^\\s*ApiHost:.*#      ApiHost: \"${api_host}\"#" /etc/XrayR/config.yml
+sed -i "s#^\\s*ApiKey:.*#      ApiKey: \"${api_key}\"#" /etc/XrayR/config.yml
+sed -i "s#^\\s*NodeID:.*#      NodeID: ${node_id}#" /etc/XrayR/config.yml
 
 # Change CertMode to none in the XrayR configuration file
-sed -i "s#^\\s*CertMode:.*#    CertMode: none,#" /etc/XrayR/config.yml
+sed -i "s#^\\s*CertMode:.*#        CertMode: none,#" /etc/XrayR/config.yml
 
 # Start XrayR
 systemctl start XrayR
