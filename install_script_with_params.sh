@@ -18,8 +18,8 @@ wget -N https://raw.githubusercontent.com/XrayR-project/XrayR-release/master/ins
 
 # Read user input for XrayR configuration
 read -p "Enter XrayR listening address (e.g., http://127.0.0.1:667): " xray_addr
-read -p "Enter XrayR UUID (e.g., 123): " xray_uuid
-read -p "Enter XrayR alterId (e.g., 41): " xray_alterid
+read -p "Enter XrayR mu_key: " xray_uuid
+read -p "Enter XrayR alterId : " xray_alterid
 
 # Update XrayR configuration file
 sed -i "s#^\\s*\"address\":.*#  \"address\": \"${xray_addr}\",#" /etc/XrayR/config.yml
