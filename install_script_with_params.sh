@@ -43,8 +43,20 @@ sed -i "s#^\\s*NodeID:.*#  NodeID: ${node_id}#" /etc/XrayR/config.yml
 # Change CertMode to none in the XrayR configuration file
 sed -i "s#^\\s*CertMode:.*#  CertMode: none,#" /etc/XrayR/config.yml
 
+# Start XrayR
 systemctl start XrayR
 
+# Check and enable BBR
+kernel_version=$(uname -r)
+if [[ $(echo ${kernel_version} | awk -F'.' '{print $1}') -ge "5" ]]; then
+    echo "net.core.default_qdisc=cake" >> /etc/sysctl.conf
+    echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+else
+    echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+    echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+fi
+sysctl -p
+echo -e "${Info}BBR启动成功！"
 
 # Install gost
 mkdir gost && cd gost
