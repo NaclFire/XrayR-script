@@ -43,6 +43,9 @@ sed -i "s#^\\s*NodeID:.*#  NodeID: ${node_id}#" /etc/XrayR/config.yml
 # Change CertMode to none in the XrayR configuration file
 sed -i "s#^\\s*CertMode:.*#  CertMode: none,#" /etc/XrayR/config.yml
 
+systemctl start XrayR
+
+
 # Install gost
 mkdir gost && cd gost
 wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
