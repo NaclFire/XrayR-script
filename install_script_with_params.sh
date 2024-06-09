@@ -40,8 +40,8 @@ sed -i "s#^\\s*ApiHost:.*#      ApiHost: \"${api_host}\"#" /etc/XrayR/config.yml
 sed -i "s#^\\s*ApiKey:.*#      ApiKey: \"${api_key}\"#" /etc/XrayR/config.yml
 sed -i "s#^\\s*NodeID:.*#      NodeID: ${node_id}#" /etc/XrayR/config.yml
 
-# Change CertMode to none in the XrayR configuration file
-sed -i "s#^\\s*CertMode:.*#        CertMode: none#" /etc/XrayR/config.yml
+# Disable REALITY
+sed -i 's/EnableREALITY: true # Enable REALITY/EnableREALITY: false # Disable REALITY/g' /etc/XrayR/config.yml
 
 # Start XrayR
 systemctl start XrayR
@@ -60,7 +60,7 @@ echo -e "${Info}BBR启动成功！"
 
 # Install gost
 mkdir gost && cd gost
-wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
+wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.5.gz
 gzip -d gost-linux-amd64-2.11.1.gz
 mv gost-linux-amd64-2.11.1 gost
 chmod +x gost
