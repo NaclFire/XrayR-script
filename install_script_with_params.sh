@@ -61,8 +61,8 @@ echo -e "${Info}BBR启动成功！"
 # Install gost
 mkdir gost && cd gost
 wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.5.gz
-gzip -d gost-linux-amd64-2.11.1.gz
-mv gost-linux-amd64-2.11.1 gost
+gzip -d gost-linux-amd64-2.11.5.gz
+mv gost-linux-amd64-2.11.5 gost
 chmod +x gost
 
 # Read user input for gost configuration
