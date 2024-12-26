@@ -11,7 +11,7 @@ systemctl disable rsyslog
 apt-get --allow-releaseinfo-change update
 
 # Install required packages
-apt-get install vim curl wget git sudo net-tools zip unzip -y
+apt-get install vim curl wget git sudo net-tools zip unzip iperf3 -y
 
 # Install XrayR
 wget -N https://raw.githubusercontent.com/XrayR-project/XrayR-release/master/install.sh && bash install.sh
@@ -60,10 +60,13 @@ echo -e "${Info}BBR启动成功！"
 
 # Install gost
 mkdir gost && cd gost
-wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-linux-amd64-2.11.5.gz
-gzip -d gost-linux-amd64-2.11.5.gz
-mv gost-linux-amd64-2.11.5 gost
+wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.12.0/gost_2.12.0_linux_amd64.tar.gz
+tar -xzvf gost_2.12.0_linux_amd64.tar.gz
 chmod +x gost
+rm gost_2.12.0_linux_amd64.tar.gz
+rm LICENSE 
+rm README_en.md 
+rm README.md
 
 # Read user input for gost configuration
 if [ -z "$4" ]; then
